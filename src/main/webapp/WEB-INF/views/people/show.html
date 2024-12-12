@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Person Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #555;
+            margin: 10px 0;
+        }
+
+        .action-links {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .action-links a {
+            text-decoration: none;
+            color: #007BFF;
+            margin: 0 10px;
+            font-size: 1em;
+        }
+
+        .action-links a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            background-color: #FF5733;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #e04a2b;
+        }
+    </style>
+</head>
+<body>
+
+<main>
+    <h1>Person Details</h1>
+
+    <p><strong>Name:</strong> <span th:text="${person.name}">VALUE</span></p>
+    <p><strong>ID:</strong> <span th:text="${person.id}">VALUE</span></p>
+    <p><strong>Age:</strong> <span th:text="${person.age}">VALUE</span></p>
+    <p><strong>Email:</strong> <span th:text="${person.email}">VALUE</span></p>
+    <p><strong>Address:</strong> <span th:text="${person.address}">VALUE</span></p>
+
+    <div class="action-links">
+        <a th:href="@{/people/{id}/edit(id=${person.id})}">Edit</a>
+        <a th:href="@{/people}">Back to List</a>
+    </div>
+
+    <form th:method="delete" th:action="@{/people/{id}(id=${person.id})}">
+        <input type="submit" value="Delete">
+    </form>
+</main>
+
+</body>
+</html>

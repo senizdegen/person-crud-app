@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Edit Person</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 500px;
+      margin: 50px auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-size: 1em;
+      color: #555;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"] {
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    input:focus {
+      border-color: #4CAF50;
+      outline: none;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .delete-btn {
+      background-color: #FF5733;
+    }
+
+    .delete-btn:hover {
+      background-color: #e04a2b;
+    }
+
+    .back-link {
+      text-align: center;
+      display: block;
+      margin-top: 20px;
+      font-size: 1em;
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .back-link:hover {
+      color: #0056b3;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<main>
+  <h2>Edit Person</h2>
+
+  <form th:action="@{/people/{id}(id=${person.getId()})}" th:method="PATCH" th:object="${person}">
+    <input type="hidden" name="_method" value="patch">
+
+    <label for="name">Enter Name:</label>
+    <input type="text" th:field="*{name}" id="name" placeholder="Name"/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+
+
+    <label for="age">Enter Age:</label>
+    <input type="number" th:field="*{age}" id="age" placeholder="Age" min="0"/>
+    <div style="color:red" th:if="${#fields.hasErrors('age')}" th:errors="*{age}">Age error</div>
+
+
+    <label for="email">Enter Email:</label>
+    <input type="email" th:field="*{email}" id="email" placeholder="Email"/>
+    <div style="color:red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email error</div>
+
+
+    <input type="submit" value="Update!"/>
+  </form>
+
+  <form th:action="@{/people/{id}(id=${person.id})}" th:method="DELETE">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" class="delete-btn" value="Delete"/>
+  </form>
+
+  <a href="/people" class="back-link">Back to List</a>
+</main>
+
+</body>
+</html>

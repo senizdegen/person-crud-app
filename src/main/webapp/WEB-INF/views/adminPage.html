@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Set admin role</title>
+</head>
+<body>
+<form th:action="@{/admin/add}" th:method="PATCH">
+
+    <label for="person">Choose person:</label>
+    <select th:object="${person}" th:field="*{id}" id="person">
+        <option th:each="person : ${people}"
+                th:value="${person.getId()}"
+                th:text="${person.getName()}">
+        </option>
+    </select>
+
+    <input type="submit" value="Set admin role">
+</form>
+</body>
+</html>
