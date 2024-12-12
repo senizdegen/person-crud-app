@@ -61,8 +61,8 @@ public class PersonDAO {
         long before = System.currentTimeMillis();
 
         for(Person person : people){
-            jdbcTemplate.update("INSERT INTO Person(id, name, age, email) VALUES (?, ?, ?, ?)",
-                    person.getId(), person.getName(), person.getAge(), person.getEmail());
+            jdbcTemplate.update("INSERT INTO Person(id, name, age, email, address) VALUES (?, ?, ?, ?, ?)",
+                    person.getId(), person.getName(), person.getAge(), person.getEmail(), person.getAddress());
         }
 
         long after = System.currentTimeMillis();
@@ -74,7 +74,7 @@ public class PersonDAO {
         List<Person> people = create200People();
         long before = System.currentTimeMillis();
 
-        jdbcTemplate.batchUpdate("INSERT INTO Person(id, name, age, email) VALUES (?, ?, ?, ?)",
+        jdbcTemplate.batchUpdate("INSERT INTO Person(id, name, age, email, address) VALUES (?, ?, ?, ?, ?)",
                 new BatchPreparedStatementSetter() {
 
                     @Override
@@ -83,6 +83,7 @@ public class PersonDAO {
                         ps.setString(2, people.get(i).getName());
                         ps.setInt(3, people.get(i).getAge());
                         ps.setString(4, people.get(i).getEmail());
+                        ps.setString(5, people.get(i).getAddress());
                     }
 
                     @Override
